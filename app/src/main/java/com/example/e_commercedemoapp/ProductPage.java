@@ -92,6 +92,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
             }
         });
 
+        //added lines of code
         sp1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
