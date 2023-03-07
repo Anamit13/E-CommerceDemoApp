@@ -257,6 +257,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
             selectItemParams.putParcelableArray(FirebaseAnalytics.Param.ITEMS,
                     new Parcelable[]{NikeAir});
             firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM, selectItemParams);
+            firebaseAnalytics.logEvent( FirebaseAnalytics.Event.SELECT_CONTENT, selectItemParams );
         }
         else if(note.getPid().equals("product2"))
         {
@@ -268,6 +269,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
             selectItemParams.putParcelableArray(FirebaseAnalytics.Param.ITEMS,
                     new Parcelable[]{NikeJordan});
             firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM, selectItemParams);
+            firebaseAnalytics.logEvent( FirebaseAnalytics.Event.SELECT_CONTENT, selectItemParams );
         }
         else if(note.getPid().equals("product3"))
         {
@@ -279,6 +281,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
             selectItemParams.putParcelableArray(FirebaseAnalytics.Param.ITEMS,
                     new Parcelable[]{NikeLight});
             firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM, selectItemParams);
+            firebaseAnalytics.logEvent( FirebaseAnalytics.Event.SELECT_CONTENT, selectItemParams );
         }
         else if(note.getPid().equals("product4"))
         {
@@ -290,6 +293,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
             selectItemParams.putParcelableArray(FirebaseAnalytics.Param.ITEMS,
                     new Parcelable[]{NikeRunning});
             firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM, selectItemParams);
+            firebaseAnalytics.logEvent( FirebaseAnalytics.Event.SELECT_CONTENT, selectItemParams );
         }
 
         intent.putExtras(bundle);
