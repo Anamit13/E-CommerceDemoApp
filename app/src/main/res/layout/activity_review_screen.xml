@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReviewScreen">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/homeIcon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/home_button"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/homeIcon"
+        app:layout_constraintRight_toLeftOf="@id/profileicon"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="22dp"
+        android:text="Review Details"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/profileicon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/profileicon"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/reviewCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:cardMaxElevation="12dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/homeIcon"
+        android:layout_marginTop="0dp"
+        android:layout_marginHorizontal="5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingVertical="15dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/productDetailstxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="5dp"
+                android:text="Product Details"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/reviewProimg"
+                android:layout_width="70dp"
+                android:layout_height="90dp"
+                android:src="@drawable/shoe1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/productDetailstxt"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="10dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/reviewProname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/reviewProimg"
+                app:layout_constraintTop_toBottomOf="@id/productDetailstxt"
+                android:text="Product Name"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/rstxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/reviewProimg"
+                app:layout_constraintTop_toBottomOf="@id/reviewProname"
+                android:text="Rs. "
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/reviewProprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/rstxt"
+                app:layout_constraintTop_toBottomOf="@id/reviewProname"
+                android:text="4499"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="15dp"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/sizeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toLeftOf="@id/proSize"
+                app:layout_constraintTop_toBottomOf="@id/productDetailstxt"
+                android:text="Size: "
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/proSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/productDetailstxt"
+                android:text="UK 8"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="15dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/qtyText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toLeftOf="@id/proQty"
+                app:layout_constraintTop_toBottomOf="@id/sizeText"
+                android:text="Quantity: "
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/proQty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/proSize"
+                android:text="3"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="15dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/shippingDetialstxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reviewProimg"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="30dp"
+                android:text="Contact and shipping Details"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/nameTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shippingDetialstxt"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:text="Name: "
+                android:textSize="19sp"
+                android:textColor="@color/black"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/reviewoname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/nameTxt"
+                app:layout_constraintTop_toBottomOf="@id/shippingDetialstxt"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:text="gfjfgbhgdsfj"
+                android:textSize="19sp"
+                android:textColor="@color/black"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/addressTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nameTxt"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:text="Address: "
+                android:textSize="19sp"
+                android:textColor="@color/black"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/reviewoaddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/addressTxt"
+                app:layout_constraintTop_toBottomOf="@id/reviewoname"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:text="gfjfgbhgdsfj"
+                android:textSize="19sp"
+                android:textColor="@color/black"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mobileTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/addressTxt"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:text="Contact No.: "
+                android:textSize="19sp"
+                android:textColor="@color/black"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/reviewomobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/mobileTxt"
+                app:layout_constraintTop_toBottomOf="@id/reviewoaddress"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:text="gfjfgbhgdsfj"
+                android:textSize="19sp"
+                android:textColor="@color/black"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/cityText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mobileTxt"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:text="City/State: "
+                android:textSize="19sp"
+                android:textColor="@color/black"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/reviewocity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/cityText"
+                app:layout_constraintTop_toBottomOf="@id/reviewomobile"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:text="gfjfgbhgdsfj"
+                android:textSize="19sp"
+                android:textColor="@color/black"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/pinTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cityText"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:text="City pin: "
+                android:textSize="19sp"
+                android:textColor="@color/black"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/reviewopin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/pinTxt"
+                app:layout_constraintTop_toBottomOf="@id/reviewocity"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:text="gfjfgbhgdsfj"
+                android:textSize="19sp"
+                android:textColor="@color/black"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tierTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pinTxt"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:text="Shipping Tier: "
+                android:textSize="19sp"
+                android:textColor="@color/black"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/reviewtier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/tierTxt"
+                app:layout_constraintTop_toBottomOf="@id/reviewopin"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:text="gfjfgbhgdsfj"
+                android:textSize="19sp"
+                android:textColor="@color/black"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/paymethodTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tierTxt"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="30dp"
+                android:text="Payment Method"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/reviewPayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/paymethodTxt"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:text="Payment Method"
+                android:textSize="19sp"
+                android:textColor="@color/black"/>
+
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/rupeeIcon"
+                android:layout_width="18dp"
+                android:layout_height="23dp"
+                android:src="@drawable/rupee"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="13dp"
+                android:layout_marginLeft="20dp"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/totalreviewprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/rupeeIcon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="13dp"
+                android:layout_marginLeft="10dp"
+                android:text="4499"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/confirmBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reviewPayment"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/button_corner"
+                android:backgroundTint="@color/LightBlue"
+                android:text="Confirm purchase"
+                android:textSize="17sp"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:paddingHorizontal="13dp"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

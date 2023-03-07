@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PurchaseSuccessful">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/homeIcon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/home_button"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"/>
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/profileicon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="25dp"
+        android:src="@drawable/profileicon"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/congratsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/homeIcon"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="25dp"
+        android:text="Congratulations!"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/purchasetxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/congratsText"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
+        android:text="Purchase successful"
+        android:textSize="21sp"
+        android:textColor="@color/black"/>
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gif"
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:background="#fff"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/purchasetxt"
+        android:src="@drawable/purchase" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/optxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gif"
+        android:text="Order Placed!!!"
+        android:textSize="24sp"
+        android:textColor="@color/black"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/yohbpstxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/optxt"
+        android:text="Your order had been placed successfully"
+        android:layout_marginTop="10dp"
+        android:textSize="17sp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/oidtxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/yohbpstxt"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="25dp"
+        android:text="Order Id: "
+        android:textSize="19sp"
+        android:textColor="@color/black" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/oid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/oidtxt"
+        app:layout_constraintTop_toBottomOf="@id/yohbpstxt"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:text=""
+        android:textSize="19sp"
+        android:textColor="@color/black" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/ddtxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/oidtxt"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="25dp"
+        android:text="Delivery date: "
+        android:textSize="19sp"
+        android:textColor="@color/black" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/dd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/ddtxt"
+        app:layout_constraintTop_toBottomOf="@id/oidtxt"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:text=""
+        android:textSize="19sp"
+        android:textColor="@color/black" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/csbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/dd"
+        android:layout_marginTop="45dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="Continue Shopping"
+        android:background="@drawable/button_corner"
+        android:backgroundTint="@color/Orange"
+        android:textColor="@color/white"
+        android:textSize="19sp"
+        android:textAllCaps="false"
+        android:paddingHorizontal="25dp"
+        android:paddingVertical="5dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/returnbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/csbtn"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="Return a product"
+        android:background="@drawable/button_corner"
+        android:backgroundTint="@color/LightBlue"
+        android:textColor="@color/white"
+        android:textSize="19sp"
+        android:textAllCaps="false"
+        android:paddingHorizontal="25dp"
+        android:paddingVertical="5dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

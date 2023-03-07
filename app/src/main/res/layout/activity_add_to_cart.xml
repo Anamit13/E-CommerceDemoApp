@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddToCart">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/homeIcon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/home_button"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/profileicon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/profileicon"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/shoppingtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/homeIcon"
+        android:text="Shopping"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/cartText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/shoppingtext"
+        android:text="CART"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="5dp" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/cartProtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cartText"
+        android:text="Cart Products"
+        android:textSize="19sp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="40dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cartRecyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/card_cart"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cartProtext" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_cart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:cardMaxElevation="12dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingVertical="20dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/totalText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="Grand Total: "
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginLeft="20dp"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ricon"
+                android:layout_width="20dp"
+                android:layout_height="24dp"
+                android:src="@drawable/rupee"
+                app:layout_constraintLeft_toRightOf="@id/totalText"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginLeft="10dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/totalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9459.00"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                app:layout_constraintLeft_toRightOf="@id/ricon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/checkOutbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:paddingHorizontal="20dp"
+                android:background="@drawable/button_corner"
+                android:text="Next"
+                android:textSize="20sp"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/Orange"
+                android:layout_marginRight="15dp"
+                android:drawableRight="@drawable/ic_baseline_arrow_right_alt_24" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

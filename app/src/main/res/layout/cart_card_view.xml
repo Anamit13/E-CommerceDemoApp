@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cart_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:cardMaxElevation="12dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/cartProimg"
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:src="@drawable/shoe1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/cartProname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/cartProimg"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Product Name"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/rstxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/cartProimg"
+                app:layout_constraintTop_toBottomOf="@id/cartProname"
+                android:text="Rs. "
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/cartProprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/rstxt"
+                app:layout_constraintTop_toBottomOf="@id/cartProname"
+                android:text="4499"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="15dp"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/sizeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/cartProimg"
+                app:layout_constraintTop_toBottomOf="@id/cartProprice"
+                android:text="Size: "
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/proSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/sizeText"
+                app:layout_constraintTop_toBottomOf="@id/cartProprice"
+                android:text="UK 8"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/addprobtn"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/plus"
+                app:layout_constraintLeft_toRightOf="@id/cartProprice"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginLeft="65dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/proqty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/addprobtn"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="3"
+                android:textSize="19sp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="9dp"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/removeprobtn"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/remove"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/proqty"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/deletepro"
+                android:layout_width="30dp"
+                android:layout_height="25dp"
+                android:src="@drawable/removepro"
+                app:layout_constraintTop_toBottomOf="@id/removeprobtn"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="36dp"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

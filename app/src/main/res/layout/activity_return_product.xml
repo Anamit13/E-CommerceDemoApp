@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReturnProduct">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/homeIcon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/home_button"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"/>
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/profileicon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="25dp"
+        android:src="@drawable/profileicon"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/rpText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/homeIcon"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="25dp"
+        android:text="Return product"
+        android:textSize="24sp"
+        android:textColor="@color/black"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/returnTypetext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rpText"
+        android:layout_marginTop="25dp"
+        android:text="Select return type"
+        android:textSize="20sp"
+        android:layout_marginLeft="30dp"
+        android:textColor="@color/black"/>
+
+    <RadioGroup
+        android:id="@+id/rgreturn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/returnTypetext"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:tooltipText="Return type"
+        android:layout_marginLeft="10dp">
+
+        <RadioButton android:id="@+id/full"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Full refund"
+            android:onClick="onRadioButtonClicked"
+            android:paddingHorizontal="3dp"
+            android:textSize="19sp"/>
+        <RadioButton android:id="@+id/partiall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Partial refund"
+            android:onClick="onRadioButtonClicked"
+            android:layout_marginLeft="10dp"
+            android:paddingHorizontal="3dp"
+            android:textSize="19sp"/>
+
+    </RadioGroup>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/enterTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rgreturn"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="25dp"
+        android:text="Enter the Order ID"
+        android:textSize="19sp"
+        android:textColor="@color/black"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/pid"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/enterTxt"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="25dp"
+        android:hint="Enter Order ID"
+        android:paddingHorizontal="25dp"
+        android:paddingVertical="5dp"
+        android:textSize="19sp"
+        android:background="@drawable/bordercolor_corderradius1"
+        android:textColor="@color/black"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/enterQtytxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pid"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="25dp"
+        android:text="Enter the product quantity"
+        android:textSize="19sp"
+        android:textColor="@color/black"
+        android:visibility="invisible"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/returnProQty"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/enterQtytxt"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="25dp"
+        android:hint="Return qty"
+        android:paddingHorizontal="25dp"
+        android:paddingVertical="5dp"
+        android:textSize="19sp"
+        android:background="@drawable/bordercolor_corderradius1"
+        android:textColor="@color/black"
+        android:visibility="invisible"/>
+
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/crbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="50dp"
+        android:text="Claim refund"
+        android:textSize="19sp"
+        android:textColor="@color/white"
+        android:background="@color/LightBlue"
+        android:paddingHorizontal="20dp"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
