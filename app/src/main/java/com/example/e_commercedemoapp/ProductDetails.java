@@ -82,6 +82,7 @@ public class ProductDetails extends AppCompatActivity {
 
         Bundle viewItemParams = new Bundle();
         viewItemParams.putString(FirebaseAnalytics.Param.CURRENCY, "INR");
+        viewItemParams.putString(FirebaseAnalytics.Param.VALUE, "viewproduct");
         viewItemParams.putDouble(FirebaseAnalytics.Param.VALUE, Double.parseDouble(fpprice));
         viewItemParams.putParcelableArray(FirebaseAnalytics.Param.ITEMS,
                 new Parcelable[]{product});

@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.RadioButton;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.analytics.FirebaseAnalytics.Event;
 
 public class PaymentMethod extends AppCompatActivity {
     private AppCompatImageView homeIcon;
@@ -58,7 +59,7 @@ public class PaymentMethod extends AppCompatActivity {
                         AddToCart.checkoutItems.toArray(new Parcelable[AddToCart.checkoutItems.size()]));
 
                 firebaseAnalytics.logEvent(FirebaseAnalytics.Event.ADD_PAYMENT_INFO, addPaymentParams);
-
+                firebaseAnalytics.logEvent(Event.CHECKOUT_PROGRESS, addPaymentParams);
                 startActivity(new Intent(getApplicationContext(), ReviewScreen.class));
             }
         });

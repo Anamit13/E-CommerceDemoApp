@@ -92,24 +92,36 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
             }
         });
 
+        //VIEW PROMOTION EVENT - GA4 IMPLEMENTATION
+
+        Bundle promoParams = new Bundle();
+        promoParams.putString(FirebaseAnalytics.Param.PROMOTION_ID, "SUMMER_FUN");
+        promoParams.putString(FirebaseAnalytics.Param.PROMOTION_NAME, "Summer Sale");
+        promoParams.putString(FirebaseAnalytics.Param.CREATIVE_NAME, "summer2020_promo.jpg");
+        promoParams.putString(FirebaseAnalytics.Param.CREATIVE_SLOT, "featured_app_1");
+        promoParams.putString(FirebaseAnalytics.Param.LOCATION_ID, "HERO_BANNER");
+        promoParams.putString(FirebaseAnalytics.Param.VALUE, "viewpromotion");
+        promoParams.putParcelableArray(FirebaseAnalytics.Param.ITEMS,
+                new Parcelable[]{NikeAir});
+
+// Promotion displayed
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.VIEW_PROMOTION, promoParams);
+
+        //GA3 implementation view promotion
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.VIEW_ITEM_LIST, promoParams);
+
+
         sp1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), PromotionSale.class));
-                Bundle promoParams = new Bundle();
-                promoParams.putString(FirebaseAnalytics.Param.PROMOTION_ID, "SUMMER_FUN");
-                promoParams.putString(FirebaseAnalytics.Param.PROMOTION_NAME, "Summer Sale");
-                promoParams.putString(FirebaseAnalytics.Param.CREATIVE_NAME, "summer2020_promo.jpg");
-                promoParams.putString(FirebaseAnalytics.Param.CREATIVE_SLOT, "featured_app_1");
-                promoParams.putString(FirebaseAnalytics.Param.LOCATION_ID, "HERO_BANNER");
-                promoParams.putParcelableArray(FirebaseAnalytics.Param.ITEMS,
-                        new Parcelable[]{NikeAir});
-
-// Promotion displayed
-                firebaseAnalytics.logEvent(FirebaseAnalytics.Event.VIEW_PROMOTION, promoParams);
-
-// Promotion selected
                 firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_PROMOTION, promoParams);
+
+                //GA3 select promotion
+                firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, promoParams);
+
+                startActivity(new Intent(getApplicationContext(), PromotionSale.class));
+// Promotion selected
+
 
             }
         });
@@ -180,31 +192,28 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
                                         NikeRunning.putString(FirebaseAnalytics.Param.PRICE, String.valueOf(document.getLong("price")));
                                     }
                                       //GA4 IMPLEMENTATION
-                                    Bundle NikeAirWithIndex = new Bundle(NikeAir);
-                                    NikeAirWithIndex.putLong(FirebaseAnalytics.Param.INDEX, 1);
-
-                                    Bundle NikeJordanWithIndex = new Bundle(NikeJordan);
-                                    NikeJordanWithIndex.putLong(FirebaseAnalytics.Param.INDEX, 2);
-
-                                    Bundle NikeLightWithIndex = new Bundle(NikeLight);
-                                    NikeLightWithIndex.putLong(FirebaseAnalytics.Param.INDEX, 3);
-
-                                    Bundle NikeRunningWithIndex = new Bundle(NikeRunning);
-                                    NikeRunningWithIndex.putLong(FirebaseAnalytics.Param.INDEX, 4);
-
-
-                                    Bundle viewItemListParams = new Bundle();
-                                    viewItemListParams.putString(FirebaseAnalytics.Param.ITEM_LIST_ID, "L001");
-                                    viewItemListParams.putString(FirebaseAnalytics.Param.ITEM_LIST_NAME, "Related products");
-                                    viewItemListParams.putParcelableArray(FirebaseAnalytics.Param.ITEMS,
-                                            new Parcelable[]{NikeAirWithIndex, NikeJordanWithIndex, NikeLightWithIndex, NikeRunningWithIndex});
-                                    firebaseAnalytics.logEvent(FirebaseAnalytics.Event.VIEW_ITEM_LIST, viewItemListParams);
-
-                                    //GA3 IMPLEMENTATION
-
-
-
                                 }
+                                Bundle NikeAirWithIndex = new Bundle(NikeAir);
+                                NikeAirWithIndex.putLong(FirebaseAnalytics.Param.INDEX, 1);
+
+                                Bundle NikeJordanWithIndex = new Bundle(NikeJordan);
+                                NikeJordanWithIndex.putLong(FirebaseAnalytics.Param.INDEX, 2);
+
+                                Bundle NikeLightWithIndex = new Bundle(NikeLight);
+                                NikeLightWithIndex.putLong(FirebaseAnalytics.Param.INDEX, 3);
+
+                                Bundle NikeRunningWithIndex = new Bundle(NikeRunning);
+                                NikeRunningWithIndex.putLong(FirebaseAnalytics.Param.INDEX, 4);
+
+
+                                Bundle viewItemListParams = new Bundle();
+                                viewItemListParams.putString(FirebaseAnalytics.Param.ITEM_LIST_ID, "L001");
+                                viewItemListParams.putString(FirebaseAnalytics.Param.ITEM_LIST_NAME, "Related products");
+                                viewItemListParams.putParcelableArray(FirebaseAnalytics.Param.ITEMS,
+                                        new Parcelable[]{NikeAirWithIndex, NikeJordanWithIndex, NikeLightWithIndex, NikeRunningWithIndex});
+                                firebaseAnalytics.logEvent(FirebaseAnalytics.Event.VIEW_ITEM_LIST, viewItemListParams);
+
+                                //GA3 IMPLEMENTATION
                                 adapter = new NoteAdapter(getApplicationContext(), arrayList);
                                 recyclerView.setAdapter(adapter);
                                 adapter.setOnItemClickListener(ProductPage.this::onItemClick);
@@ -256,6 +265,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
             selectItemParams.putParcelableArray(FirebaseAnalytics.Param.ITEMS,
                     new Parcelable[]{NikeAir});
             firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM, selectItemParams);
+            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, selectItemParams);
         }
         else if(note.getPid().equals("product2"))
         {
@@ -267,6 +277,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
             selectItemParams.putParcelableArray(FirebaseAnalytics.Param.ITEMS,
                     new Parcelable[]{NikeJordan});
             firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM, selectItemParams);
+            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, selectItemParams);
         }
         else if(note.getPid().equals("product3"))
         {
@@ -278,6 +289,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
             selectItemParams.putParcelableArray(FirebaseAnalytics.Param.ITEMS,
                     new Parcelable[]{NikeLight});
             firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM, selectItemParams);
+            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, selectItemParams);
         }
         else if(note.getPid().equals("product4"))
         {
@@ -289,6 +301,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
             selectItemParams.putParcelableArray(FirebaseAnalytics.Param.ITEMS,
                     new Parcelable[]{NikeRunning});
             firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM, selectItemParams);
+            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, selectItemParams);
         }
 
         intent.putExtras(bundle);

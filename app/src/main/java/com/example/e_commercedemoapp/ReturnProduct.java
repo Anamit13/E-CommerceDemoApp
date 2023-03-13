@@ -82,6 +82,7 @@ public class ReturnProduct extends AppCompatActivity {
                     refundParams.putString(FirebaseAnalytics.Param.CURRENCY, "INR");
 
                     firebaseAnalytics.logEvent(FirebaseAnalytics.Event.REFUND, refundParams);
+                    firebaseAnalytics.logEvent(FirebaseAnalytics.Event.PURCHASE_REFUND, refundParams);
 
                     db.collection("orders").document(id)
                             .delete()

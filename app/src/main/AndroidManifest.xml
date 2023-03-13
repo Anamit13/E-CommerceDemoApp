@@ -12,6 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ECommerceDemoApp"
         tools:targetApi="33">
+
+
         <activity
             android:name=".MyAccount"
             android:exported="false">
