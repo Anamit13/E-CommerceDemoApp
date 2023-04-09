@@ -47,4 +47,9 @@ dependencies {
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.22'
 
     implementation 'com.google.android.gms:play-services-tagmanager:18.0.2'
+
+    implementation 'com.google.firebase:firebase-config-ktx:21.3.0'
+    implementation 'com.google.firebase:firebase-analytics-ktx:21.2.1'
+
+
 }

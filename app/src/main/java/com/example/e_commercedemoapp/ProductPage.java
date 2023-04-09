@@ -34,6 +34,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.remoteconfig.ConfigUpdate;
+import com.google.firebase.remoteconfig.ConfigUpdateListener;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigException;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
 import org.checkerframework.checker.units.qual.A;
 
@@ -43,11 +48,12 @@ import java.util.Objects;
 public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItemClickListener, NavigationView.OnNavigationItemSelectedListener {
 
 
-    private AppCompatImageView menuIc, sp1;
+    private AppCompatImageView menuIc, sp1, sp2, sp3;
     private DrawerLayout drawerLayout;
     private RecyclerView recyclerView;
     private NoteAdapter adapter;
     private ArrayList<Note> arrayList;
+    private AppCompatTextView ourPopular;
 
     private FirebaseFirestore db;
 
@@ -71,6 +77,12 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
 
         db = FirebaseFirestore.getInstance();
 
+        FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+        FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
+                .setMinimumFetchIntervalInSeconds(0)
+                .build();
+        mFirebaseRemoteConfig.setConfigSettingsAsync(configSettings);
+
         recyclerView = findViewById(R.id.prorecyclerview);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         recyclerView.setHasFixedSize(true);
@@ -91,6 +103,52 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
                 }
             }
         });
+
+        boolean x = mFirebaseRemoteConfig.getBoolean("update1");
+
+        mFirebaseRemoteConfig.addOnConfigUpdateListener(new ConfigUpdateListener() {
+            @Override
+            public void onUpdate(ConfigUpdate configUpdate) {
+                Log.d(TAG, "Updated keys: " + configUpdate.getUpdatedKeys());
+
+                mFirebaseRemoteConfig.activate().addOnCompleteListener(new OnCompleteListener() {
+                    @Override
+                    public void onComplete(@NonNull Task task) {
+                    }
+                });
+            }
+
+            @Override
+            public void onError(FirebaseRemoteConfigException error) {
+                Log.w(TAG, "Config update error with code: " + error.getCode(), error);
+            }
+        });
+
+        mFirebaseRemoteConfig.fetchAndActivate()
+                .addOnCompleteListener(this, new OnCompleteListener<Boolean>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Boolean> task) {
+                        if (task.isSuccessful()) {
+                            boolean updated = task.getResult();
+                            Log.d(TAG, "Config params updated: " + updated);
+                            Toast.makeText(ProductPage.this, "Fetch and activate succeeded",
+                                    Toast.LENGTH_SHORT).show();
+                            if(x || updated)
+                            {
+                                Toast.makeText(ProductPage.this, "Tatvic" + updated + x, Toast.LENGTH_SHORT).show();
+                                sp2.setVisibility(View.GONE);
+                                sp3.setVisibility(View.VISIBLE);
+                                ourPopular.setText("49% Discounted Products");
+                            }
+
+                        } else {
+                            Toast.makeText(ProductPage.this, "Fetch failed",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+
 
         //VIEW PROMOTION EVENT - GA4 IMPLEMENTATION
 
@@ -239,6 +297,9 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
         menuIc = findViewById(R.id.menuicon);
         drawerLayout = findViewById(R.id.my_drawer_layout);
         sp1 = findViewById(R.id.sp1);
+        sp2 = findViewById(R.id.sp2);
+        sp3 = findViewById(R.id.sp3);
+        ourPopular = findViewById(R.id.ourpopular);
 
     }
 

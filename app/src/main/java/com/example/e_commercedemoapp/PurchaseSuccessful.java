@@ -126,7 +126,7 @@ public class PurchaseSuccessful extends AppCompatActivity {
                 AddToCart.checkoutItems.toArray(new Parcelable[AddToCart.checkoutItems.size()]));
 
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.PURCHASE, purchaseParams);
-        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.ECOMMERCE_PURCHASE, purchaseParams);
+       // firebaseAnalytics.logEvent(FirebaseAnalytics.Event.ECOMMERCE_PURCHASE, purchaseParams);
     }
 
     private void init(){

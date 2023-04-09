@@ -59,7 +59,7 @@ public class PaymentMethod extends AppCompatActivity {
                         AddToCart.checkoutItems.toArray(new Parcelable[AddToCart.checkoutItems.size()]));
 
                 firebaseAnalytics.logEvent(FirebaseAnalytics.Event.ADD_PAYMENT_INFO, addPaymentParams);
-                firebaseAnalytics.logEvent(Event.CHECKOUT_PROGRESS, addPaymentParams);
+                //firebaseAnalytics.logEvent(FirebaseAnalytics.Event.CHECKOUT_PROGRESS, addPaymentParams);
                 startActivity(new Intent(getApplicationContext(), ReviewScreen.class));
             }
         });
