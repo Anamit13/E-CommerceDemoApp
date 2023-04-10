@@ -12,7 +12,10 @@ import android.os.Parcelable;
 import android.view.View;
 import android.widget.RadioButton;
 
+import com.facebook.appevents.AppEventsConstants;
+import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.analytics.FirebaseAnalytics.Event;
 
 public class PaymentMethod extends AppCompatActivity {
     private AppCompatImageView homeIcon;
@@ -41,6 +44,9 @@ public class PaymentMethod extends AppCompatActivity {
 
         totalpayPrice.setText(sharedPreferences.getString("totalPrice", ""));
 
+        AppEventsLogger logger = AppEventsLogger.newLogger(this);
+
+
         makePayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,9 +61,27 @@ public class PaymentMethod extends AppCompatActivity {
                 addPaymentParams.putString(FirebaseAnalytics.Param.COUPON, "TATVIC50");
                 addPaymentParams.putString(FirebaseAnalytics.Param.PAYMENT_TYPE, paymentMethod);
                 addPaymentParams.putParcelableArray(FirebaseAnalytics.Param.ITEMS,
-                        AddToCart.checkoutItems.toArray(new Parcelable[AddToCart.checkoutItems.size()]));
+                        AddToCart.checkoutItems.toArray(new Parcelable[0]));
 
-                firebaseAnalytics.logEvent(FirebaseAnalytics.Event.ADD_PAYMENT_INFO, addPaymentParams);
+                //firebaseAnalytics.logEvent(FirebaseAnalytics.Event.ADD_PAYMENT_INFO, addPaymentParams);
+
+                //GA3 Implementation
+                Bundle ecommerceBundle = new Bundle();
+                ecommerceBundle.putString(FirebaseAnalytics.Param.CURRENCY, "INR");
+                ecommerceBundle.putDouble(FirebaseAnalytics.Param.VALUE, Double.parseDouble(totalpayPrice.getText().toString()));
+                ecommerceBundle.putString(FirebaseAnalytics.Param.CHECKOUT_OPTION, paymentMethod);
+                ecommerceBundle.putParcelableArrayList("items", AddToCart.checkoutItems_ga3);
+
+                firebaseAnalytics.logEvent(Event.SET_CHECKOUT_OPTION, ecommerceBundle);
+
+                //FB PIXEL IMPLEMENTATION
+                Bundle params = new Bundle();
+                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE,"product_group"); //value will be a product_group
+                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_ID,"SKU_123"); //Passing product or content identifier
+                params.putString(AppEventsConstants.EVENT_PARAM_CURRENCY,"INR");
+                params.putString(AppEventsConstants.EVENT_PARAM_PAYMENT_INFO_AVAILABLE,paymentMethod);
+                params.putInt(AppEventsConstants.EVENT_PARAM_NUM_ITEMS,2); //Number Of Items
+                logger.logEvent(AppEventsConstants.EVENT_NAME_ADDED_PAYMENT_INFO, 7998, params);  // In value - pass value of the product
 
                 startActivity(new Intent(getApplicationContext(), ReviewScreen.class));
             }

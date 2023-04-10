@@ -50,6 +50,22 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="5dp" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/ucBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profileicon"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:text="Update Cart"
+        android:paddingHorizontal="13dp"
+        android:textSize="15sp"
+        android:textAllCaps="false"
+        android:background="@drawable/button_corner"
+        android:backgroundTint="@color/black"
+        android:textColor="@color/white"/>
+
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/cartProtext"

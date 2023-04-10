@@ -16,6 +16,8 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.facebook.appevents.AppEventsConstants;
+import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
@@ -26,6 +28,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     private final ArrayList<CartModel> cartModelArrayList;
     private FirebaseAnalytics firebaseAnalytics;
     Bundle global;
+
+    static int flag = -1;
 
     public CartAdapter(Context context, ArrayList<CartModel> cartModelArrayList) {
         this.context = context;
@@ -83,6 +87,25 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                         new Parcelable[]{global});
 
                 firebaseAnalytics.logEvent(FirebaseAnalytics.Event.REMOVE_FROM_CART, removeCartParam);
+
+                //GA3 Implementation
+                Bundle GA3_removeCart = new Bundle();
+                GA3_removeCart.putString("checkGA", "GA3");
+                GA3_removeCart.putBundle("items", global);
+                firebaseAnalytics.logEvent(FirebaseAnalytics.Event.REMOVE_FROM_CART, GA3_removeCart);
+
+                //FB PIXEL IMPLEMENTATION
+                AppEventsLogger logger = AppEventsLogger.newLogger(context.getApplicationContext());
+                Bundle params = new Bundle();
+
+                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE,"product"); //value will be a product as in the UI single product is getting removed
+
+                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_ID,"SKU_123"); //Passing product or content identifier
+                params.putString(AppEventsConstants.EVENT_PARAM_CURRENCY,"INR");
+                params.putInt(AppEventsConstants.EVENT_PARAM_NUM_ITEMS,2);//Number Of Items
+                logger.logEvent("remove_from_cart", 7998, params); //value - pass value of the product
+
+
                 arrayList.remove(cartModel);
                 notifyDataSetChanged();
                 ((AddToCart) context).totalPrice.setText(String.valueOf(getTotalAmount()));
@@ -96,6 +119,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 cartModel.setProQty(qty+1);
                 notifyDataSetChanged();
                 ((AddToCart) context).totalPrice.setText(String.valueOf(getTotalAmount()));
+                flag = 1;
             }
         });
 
@@ -107,6 +131,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                     cartModel.setProQty(qty-1);
                     notifyDataSetChanged();
                     ((AddToCart) context).totalPrice.setText(String.valueOf( getTotalAmount()));
+                    flag = 0;
                 }
             }
         });

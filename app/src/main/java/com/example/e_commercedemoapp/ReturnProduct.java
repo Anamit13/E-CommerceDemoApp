@@ -81,7 +81,12 @@ public class ReturnProduct extends AppCompatActivity {
                     refundParams.putString(FirebaseAnalytics.Param.AFFILIATION, "Tatvic store");
                     refundParams.putString(FirebaseAnalytics.Param.CURRENCY, "INR");
 
-                    firebaseAnalytics.logEvent(FirebaseAnalytics.Event.REFUND, refundParams);
+                    //firebaseAnalytics.logEvent(FirebaseAnalytics.Event.REFUND, refundParams);
+
+                    //GA3 Implementation
+                    Bundle ecommerceBundle = new Bundle();
+                    ecommerceBundle.putString( FirebaseAnalytics.Param.TRANSACTION_ID, id );
+                    firebaseAnalytics.logEvent(FirebaseAnalytics.Event.PURCHASE_REFUND, ecommerceBundle);
 
                     db.collection("orders").document(id)
                             .delete()
@@ -98,7 +103,7 @@ public class ReturnProduct extends AppCompatActivity {
                                 }
                             });
                 }
-                //comment just for git push
+
                 else if(returnType.equals("partial"))
                 {
                     returnqty = returnQty.getText().toString();
@@ -151,7 +156,8 @@ public class ReturnProduct extends AppCompatActivity {
                             refundParams.putString(FirebaseAnalytics.Param.ITEM_ID, itemId);
                             refundParams.putLong(FirebaseAnalytics.Param.QUANTITY, Long.parseLong(returnqty));
 
-                            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.REFUND, refundParams);
+//                            firebaeAnalytics.logEvent(FirebaseAnalytics.Event.REFUND, refundParams);
+                            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.PURCHASE_REFUND, refundParams);
 
                             finalQty = initQty - Integer.parseInt(returnqty);
 

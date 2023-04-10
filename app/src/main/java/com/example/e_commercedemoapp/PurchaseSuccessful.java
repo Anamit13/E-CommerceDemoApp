@@ -18,6 +18,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.facebook.appevents.AppEventsConstants;
+import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -54,6 +56,8 @@ public class PurchaseSuccessful extends AppCompatActivity {
         firebaseAnalytics = FirebaseAnalytics.getInstance(this);
         db = FirebaseFirestore.getInstance();
         Map<String, String> product = new HashMap<>();
+
+        AppEventsLogger logger = AppEventsLogger.newLogger(this);
 
         sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
         homeIcon.setOnClickListener(new View.OnClickListener() {
@@ -122,10 +126,28 @@ public class PurchaseSuccessful extends AppCompatActivity {
         purchaseParams.putDouble(FirebaseAnalytics.Param.TAX, 58);
         purchaseParams.putDouble(FirebaseAnalytics.Param.SHIPPING, 150);
         purchaseParams.putString(FirebaseAnalytics.Param.COUPON, "TATVIC50");
-        purchaseParams.putParcelableArray(FirebaseAnalytics.Param.ITEMS,
-                AddToCart.checkoutItems.toArray(new Parcelable[AddToCart.checkoutItems.size()]));
+//        purchaseParams.putParcelableArray(FirebaseAnalytics.Param.ITEMS,
+//                AddToCart.checkoutItems.toArray(new Parcelable[AddToCart.checkoutItems.size()]));
+//
+        //firebaseAnalytics.logEvent(FirebaseAnalytics.Event.PURCHASE, purchaseParams);
+        purchaseParams.putParcelableArrayList("items", AddToCart.checkoutItems_ga3);
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.ECOMMERCE_PURCHASE, purchaseParams);
 
-        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.PURCHASE, purchaseParams);
+        //FB PIXEL IMPLEMENTATION
+        Bundle params = new Bundle();
+
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE,"product_group"); //value will be a product_group
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_ID,"SKU_123"); //Passing product or content identifier
+        params.putString(AppEventsConstants.EVENT_PARAM_CURRENCY,"INR");
+        params.putInt(AppEventsConstants.EVENT_PARAM_NUM_ITEMS,2); //Number Of Items
+        params.putString(AppEventsConstants.EVENT_PARAM_ORDER_ID, orderid); //value will be unique OrderID of product
+        logger.logEvent(AppEventsConstants.EVENT_NAME_PURCHASED, 7998, params); // In value - pass value of the product
+
+        Bundle rewadz = new Bundle();
+        rewadz.putString(FirebaseAnalytics.Param.TRANSACTION_ID, orderid);
+        rewadz.putString("Reward_type", "Purchase reward");
+        rewadz.putDouble("Reward_count", Double.parseDouble(sharedPreferences.getString("totalPrice", ""))/80);
+        firebaseAnalytics.logEvent("Rewardz", rewadz);
     }
 
     private void init(){
