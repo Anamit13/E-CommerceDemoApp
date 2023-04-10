@@ -67,6 +67,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
     private ArrayList<Note> arrayList;
 
     private FirebaseFirestore db;
+    String utmSource = "chk";
 
     private FirebaseAnalytics firebaseAnalytics;
     String id;
@@ -86,7 +87,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
         getSupportActionBar().hide();
         init();
         firebaseAnalytics = FirebaseAnalytics.getInstance(this);
-
+        dynamicLink();
         FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
         FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
                 .setMinimumFetchIntervalInSeconds(0)
@@ -110,7 +111,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
                             Toast.makeText(ProductPage.this, "Fetch and activate succeeded" +
                                             updated + x,
                                     Toast.LENGTH_SHORT).show();
-                            if(x || updated)
+                            if((x || updated) && (Objects.equals(utmSource, "google")))
                             {
                                 sp2.setVisibility(View.GONE);
                                 sp3.setVisibility(View.VISIBLE);
@@ -153,7 +154,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
 
         fetchData();
 
-        dynamicLink();
+
 
         AppEventsLogger logger = AppEventsLogger.newLogger(this);
 
@@ -285,10 +286,15 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
                     public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
                         // Get deep link from result (may be null if no link is found)
                         Uri deepLink = null;
-                        Toast.makeText(getApplicationContext(), "Get link", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Get link" + deepLink, Toast.LENGTH_SHORT).show();
+
+                        Log.d("HERE_IS_DATA", "pendingData: "+pendingDynamicLinkData);
+
                         if (pendingDynamicLinkData != null) {
                             deepLink = pendingDynamicLinkData.getLink();
+                            utmSource = deepLink.getQueryParameter("utm_source");
                             Toast.makeText(getApplicationContext(), String.valueOf(deepLink), Toast.LENGTH_SHORT).show();
+
                         }
 
                     }
@@ -296,10 +302,15 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
                 .addOnFailureListener(this, new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        Log.d("HERE_IS_DATA", "addOnFailureListener: "+e.getMessage());
+
                         Toast.makeText(getApplicationContext(), "No Link", Toast.LENGTH_SHORT).show();
                         Log.w(TAG, "getDynamicLink:onFailure", e);
                     }
                 });
+
+
+
     }
 
     private void fetchData(){
