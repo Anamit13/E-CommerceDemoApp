@@ -106,10 +106,12 @@
                     android:scheme="https"/>
                 <data
                     android:host="google.com"
-                    android:scheme="https"/>
-                <data
-                    android:host="google.com"
                     android:scheme="http"/>
+                <data
+                    android:host="bholu.com"
+                    android:path="/product_page"
+                    android:scheme="abc"/>
+
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
             <meta-data

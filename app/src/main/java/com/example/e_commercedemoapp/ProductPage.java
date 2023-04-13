@@ -96,18 +96,21 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
         mFirebaseRemoteConfig.setDefaultsAsync(R.xml.remote_config_defaults);
 
         boolean x = mFirebaseRemoteConfig.getBoolean("update1");
+        Uri uri = getIntent().getData();
+        if (uri != null && uri.getHost().equals("bholu.com") && uri.getPath().startsWith("/product_page")) {
+            String param1 = uri.getQueryParameter("utm_source");
 
+            Log.d("fkljhgfdfghjk", "onCreate: "+param1);
+
+            Toast.makeText(getApplicationContext(), "Ballu dekh!!! "+param1, Toast.LENGTH_SHORT).show();
+            // Do something with param1 and param2
+        }
         mFirebaseRemoteConfig.fetchAndActivate()
                 .addOnCompleteListener(this, new OnCompleteListener<Boolean>() {
                     @Override
                     public void onComplete(@NonNull Task<Boolean> task) {
                         if (task.isSuccessful()) {
                             boolean updated = task.getResult();
-
-                            if(updated)
-                            {
-
-                            }
                             Toast.makeText(ProductPage.this, "Fetch and activate succeeded" +
                                             updated + x,
                                     Toast.LENGTH_SHORT).show();
@@ -145,7 +148,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
         });
 
         db = FirebaseFirestore.getInstance();
-//        FacebookSdk.sdkInitialize(this);
+        FacebookSdk.sdkInitialize(this);
 
         recyclerView = findViewById(R.id.prorecyclerview);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
@@ -293,7 +296,10 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
                         if (pendingDynamicLinkData != null) {
                             deepLink = pendingDynamicLinkData.getLink();
                             utmSource = deepLink.getQueryParameter("utm_source");
+                            String utmMedium = deepLink.getQueryParameter("utm_medium");
+                            String utmCampaign= deepLink.getQueryParameter("utm_campaign");
                             Toast.makeText(getApplicationContext(), String.valueOf(deepLink), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), utmSource+utmMedium+utmCampaign, Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -343,7 +349,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
                                         NikeAir.putString(FirebaseAnalytics.Param.ITEM_VARIANT, "White-blue");
                                         NikeAir.putString(FirebaseAnalytics.Param.ITEM_BRAND, "Nike");
                                         NikeAir.putString(FirebaseAnalytics.Param.PRICE, String.valueOf(document.getLong("price")));
-
+                                        NikeAir.putFloat("Ratings", 4.5F);
                                         //for GA3 implementation
                                         NikeAir.putString(FirebaseAnalytics.Param.CURRENCY, "INR");
                                         NikeAir.putLong(FirebaseAnalytics.Param.INDEX, 1);
@@ -357,7 +363,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
                                         NikeJordan.putString(FirebaseAnalytics.Param.ITEM_VARIANT, "white-pink");
                                         NikeJordan.putString(FirebaseAnalytics.Param.ITEM_BRAND, "Nike");
                                         NikeJordan.putString(FirebaseAnalytics.Param.PRICE, String.valueOf(document.getLong("price")));
-
+                                        NikeAir.putFloat("Ratings", 4.2F);
                                         //for GA3 implementation
                                         NikeJordan.putString(FirebaseAnalytics.Param.CURRENCY, "INR");
                                         NikeJordan.putLong(FirebaseAnalytics.Param.INDEX, 2);
@@ -371,7 +377,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
                                         NikeLight.putString(FirebaseAnalytics.Param.ITEM_VARIANT, "Yellow");
                                         NikeLight.putString(FirebaseAnalytics.Param.ITEM_BRAND, "Nike");
                                         NikeLight.putString(FirebaseAnalytics.Param.PRICE, String.valueOf(document.getLong("price")));
-
+                                        NikeAir.putFloat("Ratings", 4.8F);
                                         //for GA3 implementation
                                         NikeLight.putString(FirebaseAnalytics.Param.CURRENCY, "INR");
                                         NikeLight.putLong(FirebaseAnalytics.Param.INDEX, 3);
@@ -385,7 +391,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
                                         NikeRunning.putString(FirebaseAnalytics.Param.ITEM_VARIANT, "Green");
                                         NikeRunning.putString(FirebaseAnalytics.Param.ITEM_BRAND, "Nike");
                                         NikeRunning.putString(FirebaseAnalytics.Param.PRICE, String.valueOf(document.getLong("price")));
-
+                                        NikeAir.putFloat("Ratings", 3.8F);
                                         //for GA3 implementation
                                         NikeRunning.putString(FirebaseAnalytics.Param.CURRENCY, "INR");
                                         NikeRunning.putLong(FirebaseAnalytics.Param.INDEX, 4);
