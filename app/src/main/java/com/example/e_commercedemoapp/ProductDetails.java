@@ -190,6 +190,21 @@ public class ProductDetails extends AppCompatActivity {
 
                         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.ADD_TO_CART, addToWishlistParams);
 
+                        Bundle cev = new Bundle();
+                        cev.putString(FirebaseAnalytics.Param.ITEM_ID, "product3");
+                        cev.putString(FirebaseAnalytics.Param.ITEM_NAME, "Nike running");
+                        cev.putString(FirebaseAnalytics.Param.ITEM_CATEGORY, "Shoe");
+                        cev.putString(FirebaseAnalytics.Param.ITEM_VARIANT, "Yellow");
+                        cev.putString(FirebaseAnalytics.Param.ITEM_BRAND, "Nike");
+                        cev.putInt(FirebaseAnalytics.Param.PRICE, 3999);
+                        cev.putFloat("ratings", 4.8F);
+                        cev.putInt(FirebaseAnalytics.Param.QUANTITY, Integer.parseInt(qtySelected));
+                        cev.putString(FirebaseAnalytics.Param.CURRENCY, "INR");
+                        cev.putLong(FirebaseAnalytics.Param.INDEX, 3);
+                        cev.putDouble(FirebaseAnalytics.Param.VALUE, Double.parseDouble(qtySelected) * Double.parseDouble(fpprice));
+                        firebaseAnalytics.logEvent("manual_add_to_cart", cev);
+
+
                         //GA3 implementation
                         Bundle GA3_addToCart = new Bundle(addToWishlistParams);
                         GA3_addToCart.putString("checkGA", "GA3");

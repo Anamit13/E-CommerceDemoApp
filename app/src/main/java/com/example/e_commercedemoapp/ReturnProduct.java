@@ -86,7 +86,7 @@ public class ReturnProduct extends AppCompatActivity {
                     //GA3 Implementation
                     Bundle ecommerceBundle = new Bundle();
                     ecommerceBundle.putString( FirebaseAnalytics.Param.TRANSACTION_ID, id );
-                    firebaseAnalytics.logEvent(FirebaseAnalytics.Event.PURCHASE_REFUND, ecommerceBundle);
+                    //firebaseAnalytics.logEvent(FirebaseAnalytics.Event.PURCHASE_REFUND, ecommerceBundle);
 
                     db.collection("orders").document(id)
                             .delete()
@@ -157,7 +157,7 @@ public class ReturnProduct extends AppCompatActivity {
                             refundParams.putLong(FirebaseAnalytics.Param.QUANTITY, Long.parseLong(returnqty));
 
 //                            firebaeAnalytics.logEvent(FirebaseAnalytics.Event.REFUND, refundParams);
-                            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.PURCHASE_REFUND, refundParams);
+                            //firebaseAnalytics.logEvent(FirebaseAnalytics.Event.PURCHASE_REFUND, refundParams);
 
                             finalQty = initQty - Integer.parseInt(returnqty);
 

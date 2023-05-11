@@ -126,12 +126,12 @@ public class PurchaseSuccessful extends AppCompatActivity {
         purchaseParams.putDouble(FirebaseAnalytics.Param.TAX, 58);
         purchaseParams.putDouble(FirebaseAnalytics.Param.SHIPPING, 150);
         purchaseParams.putString(FirebaseAnalytics.Param.COUPON, "TATVIC50");
-//        purchaseParams.putParcelableArray(FirebaseAnalytics.Param.ITEMS,
-//                AddToCart.checkoutItems.toArray(new Parcelable[AddToCart.checkoutItems.size()]));
-//
-        //firebaseAnalytics.logEvent(FirebaseAnalytics.Event.PURCHASE, purchaseParams);
-        purchaseParams.putParcelableArrayList("items", AddToCart.checkoutItems_ga3);
-        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.ECOMMERCE_PURCHASE, purchaseParams);
+        purchaseParams.putParcelableArray(FirebaseAnalytics.Param.ITEMS,
+                AddToCart.checkoutItems.toArray(new Parcelable[AddToCart.checkoutItems.size()]));
+
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.PURCHASE, purchaseParams);
+        //purchaseParams.putParcelableArrayList("items", AddToCart.checkoutItems_ga3);
+        //firebaseAnalytics.logEvent(FirebaseAnalytics.Event.ECOMMERCE_PURCHASE, purchaseParams);
 
         //FB PIXEL IMPLEMENTATION
         Bundle params = new Bundle();

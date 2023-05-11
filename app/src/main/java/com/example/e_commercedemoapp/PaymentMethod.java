@@ -69,10 +69,10 @@ public class PaymentMethod extends AppCompatActivity {
                 Bundle ecommerceBundle = new Bundle();
                 ecommerceBundle.putString(FirebaseAnalytics.Param.CURRENCY, "INR");
                 ecommerceBundle.putDouble(FirebaseAnalytics.Param.VALUE, Double.parseDouble(totalpayPrice.getText().toString()));
-                ecommerceBundle.putString(FirebaseAnalytics.Param.CHECKOUT_OPTION, paymentMethod);
+                //ecommerceBundle.putString(FirebaseAnalytics.Param.CHECKOUT_OPTION, paymentMethod);
                 ecommerceBundle.putParcelableArrayList("items", AddToCart.checkoutItems_ga3);
 
-                firebaseAnalytics.logEvent(Event.SET_CHECKOUT_OPTION, ecommerceBundle);
+                //firebaseAnalytics.logEvent(Event.SET_CHECKOUT_OPTION, ecommerceBundle);
 
                 //FB PIXEL IMPLEMENTATION
                 Bundle params = new Bundle();

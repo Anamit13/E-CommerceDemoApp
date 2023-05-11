@@ -24,9 +24,9 @@
     <string name="fb_login_protocol_scheme">fb3478477782397314</string>
     <string name="facebook_client_token">c6c5134c17752a523a7f060184b70fda</string>
 
-<!--    <string name="facebook_app_id2">3478477782397315</string>-->
-<!--    <string name="fb_login_protocol_scheme2">fb3478477782397315</string>-->
-<!--    <string name="facebook_client_token2">c6c5134c17752a523a7f060184b70fdb</string>-->
+    <string name="facebook_app_id2">3478477782397315</string>
+    <string name="fb_login_protocol_scheme2">fb3478477782397315</string>
+    <string name="facebook_client_token2">c6c5134c17752a523a7f060184b70fdb</string>
 </resources>
 
 

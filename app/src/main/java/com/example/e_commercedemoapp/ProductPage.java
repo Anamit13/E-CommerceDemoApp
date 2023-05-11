@@ -2,11 +2,14 @@ package com.example.e_commercedemoapp;
 
 import static android.content.ContentValues.TAG;
 
+import static androidx.core.content.PackageManagerCompat.LOG_TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -26,6 +29,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.appsflyer.AFInAppEventParameterName;
+import com.appsflyer.AFInAppEventType;
+import com.appsflyer.AppsFlyerLib;
+import com.appsflyer.attribution.AppsFlyerRequestListener;
 import com.facebook.FacebookSdk;
 import com.facebook.LoggingBehavior;
 import com.facebook.appevents.AppEventsConstants;
@@ -54,6 +61,8 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItemClickListener, NavigationView.OnNavigationItemSelectedListener {
@@ -95,15 +104,54 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
         mFirebaseRemoteConfig.setConfigSettingsAsync(configSettings);
         mFirebaseRemoteConfig.setDefaultsAsync(R.xml.remote_config_defaults);
 
+        //Appsflyer sdk initialization
+
+        AppsFlyerLib.getInstance().init("eDupGzcFbQez6ebkD4NP7W", null, this);
+        AppsFlyerLib.getInstance().start(this);
+
+        //Getting a response from the server
+        AppsFlyerLib.getInstance().start(getApplicationContext(), "eDupGzcFbQez6ebkD4NP7W", new AppsFlyerRequestListener() {
+            @Override
+            public void onSuccess() {
+                Log.d(TAG, "SDK Initialized successfully");
+            }
+
+            @Override
+            public void onError(int i, @NonNull String s) {
+                Log.d(TAG, "Launch failed to be sent:\n" +
+                        "Error code: " + i + "\n"
+                        + "Error description: " + s);
+            }
+        });
+
+        //Enabling the debug log
+        AppsFlyerLib.getInstance().setDebugLog(true);
+
+        //Passing the event
+        Map<String, Object> eventValues = new HashMap<String, Object>();
+        eventValues.put(AFInAppEventParameterName.PRICE, 500);
+        eventValues.put(AFInAppEventParameterName.CONTENT_TYPE, "Shoes");
+        eventValues.put(AFInAppEventParameterName.CONTENT_ID, 12345);
+
+        AppsFlyerLib.getInstance().logEvent(getApplicationContext(),
+                AFInAppEventType.CONTENT_VIEW, eventValues);
+
         boolean x = mFirebaseRemoteConfig.getBoolean("update1");
         Uri uri = getIntent().getData();
-        if (uri != null && uri.getHost().equals("bholu.com") && uri.getPath().startsWith("/product_page")) {
+        if (uri != null && uri.getHost().equals("myqrcode") && uri.getPath().startsWith("/product_page")) {
             String param1 = uri.getQueryParameter("utm_source");
+            String param2 = uri.getQueryParameter("utm_medium");
+            String param3 = uri.getQueryParameter("utm_campaign");
+            String param4 = uri.getQueryParameter("utm_id");
 
-            Log.d("fkljhgfdfghjk", "onCreate: "+param1);
+//            Toast.makeText(getApplicationContext(), "Ballu dekh!!! "+param1+param2+param3+param4,
+//                    Toast.LENGTH_SHORT).show();
 
-            Toast.makeText(getApplicationContext(), "Ballu dekh!!! "+param1, Toast.LENGTH_SHORT).show();
-            // Do something with param1 and param2
+            Bundle utm = new Bundle();
+            utm.putString(FirebaseAnalytics.Param.SOURCE,param1);
+            utm.putString(FirebaseAnalytics.Param.MEDIUM,param2);
+            utm.putString(FirebaseAnalytics.Param.CAMPAIGN,param3);
+            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.CAMPAIGN_DETAILS,utm);
         }
         mFirebaseRemoteConfig.fetchAndActivate()
                 .addOnCompleteListener(this, new OnCompleteListener<Boolean>() {
@@ -111,9 +159,9 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
                     public void onComplete(@NonNull Task<Boolean> task) {
                         if (task.isSuccessful()) {
                             boolean updated = task.getResult();
-                            Toast.makeText(ProductPage.this, "Fetch and activate succeeded" +
-                                            updated + x,
-                                    Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(ProductPage.this, "Fetch and activate succeeded" +
+//                                            updated + x,
+//                                    Toast.LENGTH_SHORT).show();
                             if((x || updated) && (Objects.equals(utmSource, "google")))
                             {
                                 sp2.setVisibility(View.GONE);
@@ -122,8 +170,8 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
                             }
 
                         } else {
-                            Toast.makeText(ProductPage.this, "Fetch failed",
-                                    Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(ProductPage.this, "Fetch failed",
+//                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -150,6 +198,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
         db = FirebaseFirestore.getInstance();
         FacebookSdk.sdkInitialize(this);
 
+
         recyclerView = findViewById(R.id.prorecyclerview);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         recyclerView.setHasFixedSize(true);
@@ -164,11 +213,19 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
         FacebookSdk.setIsDebugEnabled(true);
         FacebookSdk.addLoggingBehavior(LoggingBehavior.APP_EVENTS);
 
-
-
         logger.logEvent(AppEventsConstants.EVENT_NAME_ACTIVATED_APP);
 
-        logger.logEvent("App Activated... Chill", 58);
+
+
+//        if(getString(R.string.facebook_app_id).equals(String.valueOf("3478477782397314"))){
+//            Log.d("RUK_BALLU", "pehle me aaya ");
+//        } else{
+//            Log.d("RUK_BALLU", "dusre me aaya ");
+//
+//        }
+
+
+//        logger.logEvent("App Activated... Chill", 58);
 
         Bundle params = new Bundle();
         params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE,"product_group"); //value will be a product_group
@@ -193,7 +250,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
             @Override
             public void onSuccess(String s) {
                 id = s;
-                Toast.makeText(getApplicationContext(), id, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), id, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -242,6 +299,11 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
 
         FirebaseMessaging.getInstance().setAutoInitEnabled(true);
 
+        Bundle cpv = new Bundle();
+        cpv.putString(FirebaseAnalytics.Param.SCREEN_NAME, "Product list");
+        cpv.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "product_page");
+
+        firebaseAnalytics.logEvent("manual_screen_view", cpv);
 
         sp1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -275,7 +337,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
                         // Log and toast
                         String msg = token;
                         Log.d(TAG, msg);
-                        Toast.makeText(ProductPage.this, msg, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(ProductPage.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -289,7 +351,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
                     public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
                         // Get deep link from result (may be null if no link is found)
                         Uri deepLink = null;
-                        Toast.makeText(getApplicationContext(), "Get link" + deepLink, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "Get link" + deepLink, Toast.LENGTH_SHORT).show();
 
                         Log.d("HERE_IS_DATA", "pendingData: "+pendingDynamicLinkData);
 
@@ -298,8 +360,8 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
                             utmSource = deepLink.getQueryParameter("utm_source");
                             String utmMedium = deepLink.getQueryParameter("utm_medium");
                             String utmCampaign= deepLink.getQueryParameter("utm_campaign");
-                            Toast.makeText(getApplicationContext(), String.valueOf(deepLink), Toast.LENGTH_SHORT).show();
-                            Toast.makeText(getApplicationContext(), utmSource+utmMedium+utmCampaign, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getApplicationContext(), String.valueOf(deepLink), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getApplicationContext(), utmSource+utmMedium+utmCampaign, Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -310,7 +372,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
                     public void onFailure(@NonNull Exception e) {
                         Log.d("HERE_IS_DATA", "addOnFailureListener: "+e.getMessage());
 
-                        Toast.makeText(getApplicationContext(), "No Link", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "No Link", Toast.LENGTH_SHORT).show();
                         Log.w(TAG, "getDynamicLink:onFailure", e);
                     }
                 });
@@ -349,7 +411,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
                                         NikeAir.putString(FirebaseAnalytics.Param.ITEM_VARIANT, "White-blue");
                                         NikeAir.putString(FirebaseAnalytics.Param.ITEM_BRAND, "Nike");
                                         NikeAir.putString(FirebaseAnalytics.Param.PRICE, String.valueOf(document.getLong("price")));
-                                        NikeAir.putFloat("Ratings", 4.5F);
+                                        NikeAir.putFloat("ratings", 4.5F);
                                         //for GA3 implementation
                                         NikeAir.putString(FirebaseAnalytics.Param.CURRENCY, "INR");
                                         NikeAir.putLong(FirebaseAnalytics.Param.INDEX, 1);
@@ -363,7 +425,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
                                         NikeJordan.putString(FirebaseAnalytics.Param.ITEM_VARIANT, "white-pink");
                                         NikeJordan.putString(FirebaseAnalytics.Param.ITEM_BRAND, "Nike");
                                         NikeJordan.putString(FirebaseAnalytics.Param.PRICE, String.valueOf(document.getLong("price")));
-                                        NikeAir.putFloat("Ratings", 4.2F);
+                                        NikeAir.putFloat("ratings", 4.2F);
                                         //for GA3 implementation
                                         NikeJordan.putString(FirebaseAnalytics.Param.CURRENCY, "INR");
                                         NikeJordan.putLong(FirebaseAnalytics.Param.INDEX, 2);
@@ -377,7 +439,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
                                         NikeLight.putString(FirebaseAnalytics.Param.ITEM_VARIANT, "Yellow");
                                         NikeLight.putString(FirebaseAnalytics.Param.ITEM_BRAND, "Nike");
                                         NikeLight.putString(FirebaseAnalytics.Param.PRICE, String.valueOf(document.getLong("price")));
-                                        NikeAir.putFloat("Ratings", 4.8F);
+                                        NikeAir.putFloat("ratings", 4.8F);
                                         //for GA3 implementation
                                         NikeLight.putString(FirebaseAnalytics.Param.CURRENCY, "INR");
                                         NikeLight.putLong(FirebaseAnalytics.Param.INDEX, 3);
@@ -391,7 +453,7 @@ public class ProductPage extends AppCompatActivity implements NoteAdapter.OnItem
                                         NikeRunning.putString(FirebaseAnalytics.Param.ITEM_VARIANT, "Green");
                                         NikeRunning.putString(FirebaseAnalytics.Param.ITEM_BRAND, "Nike");
                                         NikeRunning.putString(FirebaseAnalytics.Param.PRICE, String.valueOf(document.getLong("price")));
-                                        NikeAir.putFloat("Ratings", 3.8F);
+                                        NikeAir.putFloat("ratings", 3.8F);
                                         //for GA3 implementation
                                         NikeRunning.putString(FirebaseAnalytics.Param.CURRENCY, "INR");
                                         NikeRunning.putLong(FirebaseAnalytics.Param.INDEX, 4);
